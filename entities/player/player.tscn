@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://rlhfhpkbt0nl"]
+
+[ext_resource type="Script" uid="uid://crskn7j16howk" path="res://entities/player/player_controller.gd" id="1_symyc"]
+
+[sub_resource type="Environment" id="Environment_merdl"]
+background_color = Color(0, 0, 0, 0)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_u3f3p"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_merdl"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1116170591]
+script = ExtResource("1_symyc")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1295532706]
+
+[node name="PlayerScreen" type="Control" parent="CanvasLayer" unique_id=2119599327]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PixelatedViewport" type="SubViewportContainer" parent="CanvasLayer/PlayerScreen" unique_id=427346436]
+texture_filter = 1
+texture_repeat = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+stretch_shrink = 8
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/PlayerScreen/PixelatedViewport" unique_id=803510133]
+handle_input_locally = false
+size = Vector2i(144, 81)
+render_target_update_mode = 4
+
+[node name="PixelatedCamera" type="Camera3D" parent="CanvasLayer/PlayerScreen/PixelatedViewport/SubViewport" unique_id=260350728]
+cull_mask = 1048569
+current = true
+
+[node name="NonPixelatedViewport" type="SubViewportContainer" parent="CanvasLayer/PlayerScreen" unique_id=1058936838]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+stretch = true
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/PlayerScreen/NonPixelatedViewport" unique_id=1788307729]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="NonPixelatedCamera" type="Camera3D" parent="CanvasLayer/PlayerScreen/NonPixelatedViewport/SubViewport" unique_id=1263349686]
+cull_mask = 2
+environment = SubResource("Environment_merdl")
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=801605889]
+layers = 4
+mesh = SubResource("CapsuleMesh_u3f3p")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=22555520]
+shape = SubResource("CapsuleShape3D_merdl")

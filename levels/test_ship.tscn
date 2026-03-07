@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://djhqy1cg0w771"]
+
+[ext_resource type="PackedScene" uid="uid://djm07mtqfuu1x" path="res://enviroment/props/monitor/monitor.tscn" id="1_lokjw"]
+[ext_resource type="Environment" uid="uid://gmpodbf07xdy" path="res://enviroment/blackhole/blackhole.tres" id="3_orynb"]
+[ext_resource type="PackedScene" uid="uid://rlhfhpkbt0nl" path="res://entities/player/player.tscn" id="4_ywl13"]
+
+[node name="TestShip" type="Node3D" unique_id=1190936938]
+
+[node name="Room" type="CSGCombiner3D" parent="." unique_id=567998406]
+use_collision = true
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Room" unique_id=1989388725]
+radius = 5.0
+height = 4.0
+sides = 6
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Room/CSGCylinder3D" unique_id=2050108240]
+operation = 2
+radius = 4.5
+height = 3.0
+sides = 6
+
+[node name="WindowCutout" type="CSGCombiner3D" parent="Room" unique_id=1231548634]
+operation = 2
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Room/WindowCutout" unique_id=85590984]
+radius = 5.1
+height = 1.615
+sides = 6
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Room/WindowCutout/CSGCylinder3D" unique_id=1196910907]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.73746765)
+operation = 2
+size = Vector3(10.527, 3.854, 7.4242887)
+
+[node name="monitor" parent="." unique_id=1609047966 instance=ExtResource("1_lokjw")]
+transform = Transform3D(0.34761474, -0.1578643, 0.079642005, 0, -0.17566472, -0.34819803, 0.17681624, 0.3103558, -0.15657346, 0.9400463, -0.31892085, -1.5582063)
+
+[node name="monitor2" parent="." unique_id=1956670558 instance=ExtResource("1_lokjw")]
+transform = Transform3D(0.37798557, 0.085761, -0.043266106, 1.10172245e-08, -0.17566468, -0.348198, -0.09605682, 0.33747137, -0.17025319, -1.3523312, -0.31892085, -1.5582063)
+
+[node name="monitor3" parent="." unique_id=159945800 instance=ExtResource("1_lokjw")]
+transform = Transform3D(0.37943876, 0.08918333, 0.013137111, -0.0015973974, 0.06347844, -0.38479593, -0.09013158, 0.3743218, 0.062124595, -1.1418531, -1.023309, -1.5582063)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=312702938]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33974266, 0)
+
+[node name="Player" parent="." unique_id=1788178420 instance=ExtResource("4_ywl13")]
+transform = Transform3D(0.9840862, 0, -0.1776916, 0, 1, 0, 0.1776916, 0, 0.9840862, 2.241, 0, -1.418)
+mouse_sensitivity = 0.05
+speed = 2.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=568229437]
+environment = ExtResource("3_orynb")

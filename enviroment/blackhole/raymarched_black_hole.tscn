@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cka4uavekheii"]
+
+[ext_resource type="Shader" uid="uid://bowf6umcpg54l" path="res://shaders/BlackHoleWithSkybox.gdshader" id="1_o54hj"]
+[ext_resource type="Texture2D" uid="uid://j8r43min5k7d" path="res://enviroment/skybox/cubemap-ce5e089c5c27fbd2a65d664e021bef64.cube.jpg" id="2_o54hj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g0u7g"]
+shader = ExtResource("1_o54hj")
+shader_parameter/disc_width = 10.0
+shader_parameter/outer_radius = 4.0
+shader_parameter/inner_radius = 1.5
+shader_parameter/disc_speed = 2.0
+shader_parameter/disc_color = Color(0.07601924, 0.20701098, 0.20811175, 1)
+shader_parameter/doppler_beaming_factor = 66.0
+shader_parameter/hue_radius = 0.75
+shader_parameter/hue_shift_factor = -0.03
+shader_parameter/Schwarzschild_radius = 100.0
+shader_parameter/sky_panorama_2d = ExtResource("2_o54hj")
+shader_parameter/sky_panorama_brightness = 1.0
+shader_parameter/black_hole_center = Vector3(0, 0, 0)
+shader_parameter/near_bh_step_mult = 0.05
+shader_parameter/MAX_DIST = 10000.0
+shader_parameter/ITERATIONS = 500
+shader_parameter/EPSILON = 0.001
+
+[sub_resource type="Sky" id="Sky_uprfh"]
+sky_material = SubResource("ShaderMaterial_g0u7g")
+
+[sub_resource type="Environment" id="Environment_jern6"]
+background_mode = 2
+sky = SubResource("Sky_uprfh")
+
+[node name="RaymarchedBlackHole" type="Node3D" unique_id=1903829489]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=872865791]
+environment = SubResource("Environment_jern6")
