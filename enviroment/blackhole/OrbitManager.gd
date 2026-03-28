@@ -34,22 +34,26 @@ const KG_TO_SM : float = 5.02785e-31
 # G = (4 * PI^2) / (SOLAR_MASS * DAYS_IN_YEAR^2)
 const G = 4 * PI ** 2 / (SOLAR_MASS * 365.256 ** 2)
 
-
+#Blackhole stuff
 const blackhole_mass : float = 9.27 * SOLAR_MASS
 @export var blackhole_pos : Vector3 = Vector3(-0.07246, 0, 0) # AU
 @export var blackhole_vel : Vector3 = Vector3(0, 0, -0.00672) # AU/day
-
 #r = 2 * G * M / c^2
 const schwarzschild_radius : float = 2 * G * blackhole_mass / c**2
+@export var blackhole_radius = object_scale * schwarzschild_radius * AU_SCALE;
 
+#Star Stuff
 const star_mass : float = .93 * SOLAR_MASS
 @export var star_pos : Vector3 = Vector3(0.72232, 0, 0) # AU
 @export var star_vel : Vector3 = Vector3(0, 0, 0.06703) # AU/day
 var star_radius : float = 1. * SOLAR_RADIUS#AU
+@export var star_radius_a = object_scale * star_radius * AU_SCALE
 
-var ship_mass : float = 2000000 * KG_TO_SM  
-var ship_position : Vector3 = blackhole_pos - Vector3(0, 0, 20) * UNIT_TO_AU;
-var ship_velocity : Vector3 = Vector3(0,0,0)
+
+#Ship Stuff
+@export var ship_mass : float = 2000000 * KG_TO_SM
+@export var ship_pos : Vector3 = (blackhole_pos + Vector3(0,0,schwarzschild_radius));
+@export var ship_vel : Vector3 = Vector3(0,0,0)
 
 func _init() -> void:
 	pass
@@ -59,9 +63,10 @@ func _ready() -> void:
 	star_vel = Vector3(0, 0, 0.06703)
 	blackhole_pos = Vector3(-0.07246, 0, 0)
 	blackhole_vel = Vector3(0, 0, -0.00672)
+	ship_pos : Vector3 = (blackhole_pos - Vector3(0,0,schwarzschild_radius) * 3);
+	ship_vel : Vector3 = Vector3(0,0,0)
 
-@export var blackhole_radius = object_scale * schwarzschild_radius * AU_SCALE;
-@export var star_radius_a = object_scale * star_radius * AU_SCALE
+
 func _process(delta: float) -> void:
 	if(Engine.is_editor_hint()):
 		if(!simulate):
@@ -73,14 +78,25 @@ func _process(delta: float) -> void:
 	blackhole_vel += dist.normalized() * (G * star_mass / (dist.length() ** 2)) * delta * sim_speed
 	star_vel += -dist.normalized() * (G * blackhole_mass / (dist.length() ** 2)) * delta * sim_speed
 	
+	dist = star_pos - ship_pos;
+	ship_vel += dist.normalized() * (G * star_mass / (dist.length() ** 2)) * delta * sim_speed
+	dist = blackhole_pos - ship_pos;
+	ship_vel += dist.normalized() * (G * blackhole_mass / (dist.length() ** 2)) * delta * sim_speed
+
+	
+	
 	blackhole_pos += blackhole_vel * delta * sim_speed
 	star_pos += star_vel * delta * sim_speed
+	ship_pos += ship_vel * delta * sim_speed
 	
 	if(star != null):
 		star.position = (star_pos - blackhole_pos * float(stationary_blackhole)) * AU_SCALE
 	
 	if(bh != null):
 		bh.position = (blackhole_pos - blackhole_pos * float(stationary_blackhole)) * AU_SCALE
+		
+	if(ship != null):
+		ship.position = (ship_pos - blackhole_pos) * float(stationary_blackhole) * AU_SCALE
 	
 	sky_material.set_shader_parameter("star_radius", star_scale_mult * object_scale * star_radius * AU_SCALE)
 	sky_material.set_shader_parameter("Schwarzschild_radius", bh_scale_mult * object_scale * schwarzschild_radius * AU_SCALE)

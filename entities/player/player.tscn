@@ -1,92 +1,14 @@
 [gd_scene format=3 uid="uid://rlhfhpkbt0nl"]
 
 [ext_resource type="Script" uid="uid://crskn7j16howk" path="res://entities/player/player_controller.gd" id="1_symyc"]
-[ext_resource type="Shader" uid="uid://ot8cx7dgmwc5" path="res://entities/player/shaders/depth_color.gdshader" id="2_sglur"]
-[ext_resource type="Shader" uid="uid://teqyn6n5fkb4" path="res://entities/player/shaders/cull_by_other_depth.gdshader" id="3_bls4j"]
-[ext_resource type="Texture2D" uid="uid://qvuntgnw7l3g" path="res://entities/player/shaders/low_res_viewport.tres" id="4_bls4j"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fkugw"]
-render_priority = 0
-shader = ExtResource("2_sglur")
-
-[sub_resource type="QuadMesh" id="QuadMesh_8fjmc"]
-resource_local_to_scene = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qiwj3"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("3_bls4j")
-shader_parameter/pixelated_tex = ExtResource("4_bls4j")
-
-[sub_resource type="QuadMesh" id="QuadMesh_26q78"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u3f3p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_merdl"]
 
-[node name="Player" type="CharacterBody3D" unique_id=195665807]
+[node name="Player" type="CharacterBody3D" unique_id=195665807 node_paths=PackedStringArray("cameras")]
 script = ExtResource("1_symyc")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1295532706]
-
-[node name="PlayerScreen" type="Control" parent="CanvasLayer" unique_id=2119599327]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="PixelatedViewport" type="SubViewportContainer" parent="CanvasLayer/PlayerScreen" unique_id=427346436]
-texture_filter = 1
-texture_repeat = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/PlayerScreen/PixelatedViewport" unique_id=803510133]
-handle_input_locally = false
-screen_space_aa = 1
-anisotropic_filtering_level = 0
-size = Vector2i(1152, 648)
-render_target_update_mode = 4
-
-[node name="PixelatedCamera" type="Camera3D" parent="CanvasLayer/PlayerScreen/PixelatedViewport/SubViewport" unique_id=260350728]
-cull_mask = 1
-current = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CanvasLayer/PlayerScreen/PixelatedViewport/SubViewport/PixelatedCamera" unique_id=1042265509]
-material_override = SubResource("ShaderMaterial_fkugw")
-mesh = SubResource("QuadMesh_8fjmc")
-
-[node name="NonPixelatedViewport" type="SubViewportContainer" parent="CanvasLayer/PlayerScreen" unique_id=1058936838]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-stretch = true
-
-[node name="SubViewport" type="SubViewport" parent="CanvasLayer/PlayerScreen/NonPixelatedViewport" unique_id=1788307729]
-handle_input_locally = false
-size = Vector2i(1152, 648)
-render_target_update_mode = 4
-
-[node name="NonPixelatedCamera" type="Camera3D" parent="CanvasLayer/PlayerScreen/NonPixelatedViewport/SubViewport" unique_id=1263349686]
-cull_mask = 2
-current = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="CanvasLayer/PlayerScreen/NonPixelatedViewport/SubViewport/NonPixelatedCamera" unique_id=1353983340]
-layers = 2
-material_override = SubResource("ShaderMaterial_qiwj3")
-mesh = SubResource("QuadMesh_26q78")
+cameras = [NodePath("PixelatedCamera")]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=801605889]
 layers = 4
@@ -94,3 +16,7 @@ mesh = SubResource("CapsuleMesh_u3f3p")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=22555520]
 shape = SubResource("CapsuleShape3D_merdl")
+
+[node name="PixelatedCamera" type="Camera3D" parent="." unique_id=260350728]
+cull_mask = 1
+current = true

@@ -8,6 +8,7 @@ render_mode unshaded;
 
 uniform samplerCube sky_panorama : source_color, filter_linear_mipmap;
 
+uniform vec3 view_dir_offset = vec3(0);
 uniform float sky_panorama_brightness = 1.;
 
 uniform float star_radius = 1.;

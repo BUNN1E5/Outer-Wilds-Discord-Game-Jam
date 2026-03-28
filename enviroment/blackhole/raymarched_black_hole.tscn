@@ -10,25 +10,23 @@ height = 2000.0
 
 [node name="RaymarchedBlackHole" type="Node3D" unique_id=1903829489 node_paths=PackedStringArray("star", "bh")]
 script = ExtResource("1_g0u7g")
-SECONDS_IN_DAY = 1.0
 sim_speed = 200.0
-UNIT_TO_AU = 5.852
 object_scale = 2.168
 sky_material = ExtResource("2_o54hj")
 star = NodePath("Star")
 bh = NodePath("BH")
-blackhole_pos = Vector3(0.12362637, 0, -0.08718109)
-blackhole_vel = Vector3(0.0028313363, 0, 0.0018519271)
-star_pos = Vector3(-1.2322341, 0, 0.9155808)
-star_vel = Vector3(-0.028222041, 0, -0.018412694)
-blackhole_radius = 2.321765934946496e-06
-star_radius_a = 0.059001145353920016
+blackhole_pos = Vector3(165.16899, 0, -85.42524)
+blackhole_vel = Vector3(0.007859195, 0, -0.004060726)
+star_pos = Vector3(-1645.8768, 0, 852.10236)
+star_vel = Vector3(-0.07832512, 0, 0.040515073)
+blackhole_radius = 3.96747425657296e-08
+star_radius_a = 0.0010082218960000002
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=475577957]
 mesh = SubResource("SphereMesh_o54hj")
 
 [node name="BH" type="Node3D" parent="." unique_id=12951822]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.72346157, 0, -0.51018375)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5169, 0, -8.542524)
 
 [node name="Star" type="Node3D" parent="." unique_id=1374792658]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2110343, 0, 5.3579793)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -164.58769, 0, 85.210236)
