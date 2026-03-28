@@ -1,23 +1,9 @@
 [gd_scene format=3 uid="uid://djhqy1cg0w771"]
 
 [ext_resource type="PackedScene" uid="uid://djm07mtqfuu1x" path="res://enviroment/props/monitor/monitor.tscn" id="1_lokjw"]
-[ext_resource type="PackedScene" uid="uid://rlhfhpkbt0nl" path="res://entities/player/player.tscn" id="2_vh8cc"]
-[ext_resource type="Shader" uid="uid://teqyn6n5fkb4" path="res://entities/player/shaders/cull_by_other_depth.gdshader" id="3_thk3k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vh8cc"]
 albedo_color = Color(0.7294118, 0.23529412, 0.6745098, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_if52q"]
-resource_local_to_scene = true
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_wawrf"]
-viewport_path = NodePath("CanvasLayer/PlayerScreen/PixelatedViewport/SubViewport")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_y0c8p"]
-resource_local_to_scene = true
-render_priority = 0
-shader = ExtResource("3_thk3k")
-shader_parameter/pixelated_tex = SubResource("ViewportTexture_wawrf")
 
 [node name="TestShip" type="Node3D" unique_id=1190936938]
 
@@ -57,39 +43,11 @@ transform = Transform3D(-0.8182833, 0.007056313, 0.0077815503, -0.02109576, 0.00
 [node name="monitor2" parent="." unique_id=1956670558 instance=ExtResource("1_lokjw")]
 transform = Transform3D(0.37798557, 0.085761, -0.043266106, 1.10172245e-08, -0.17566468, -0.348198, -0.09605682, 0.33747137, -0.17025319, -1.3523312, -0.31892085, -1.5582063)
 
-[node name="Cube" parent="monitor2" index="0" unique_id=1943351845]
+[node name="Cube" parent="monitor2" index="0" unique_id=2079951906]
 material_override = SubResource("StandardMaterial3D_vh8cc")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=312702938]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33974266, 0)
 layers = 3
 
-[node name="Player" parent="." unique_id=195665807 instance=ExtResource("2_vh8cc")]
-mouse_sensitivity = 0.02
-speed = 2.0
-
-[node name="PixelatedViewport" parent="Player/CanvasLayer/PlayerScreen" parent_id_path=PackedInt32Array(195665807, 2119599327) index="0" unique_id=427346436]
-stretch_shrink = 3
-
-[node name="SubViewport" parent="Player/CanvasLayer/PlayerScreen/PixelatedViewport" index="0" unique_id=803510133]
-transparent_bg = true
-size = Vector2i(384, 216)
-
-[node name="MeshInstance3D" parent="Player/CanvasLayer/PlayerScreen/PixelatedViewport/SubViewport/PixelatedCamera" parent_id_path=PackedInt32Array(195665807, 260350728) index="0" unique_id=1042265509]
-mesh = SubResource("QuadMesh_if52q")
-
-[node name="NonPixelatedViewport" parent="Player/CanvasLayer/PlayerScreen" parent_id_path=PackedInt32Array(195665807, 2119599327) index="1" unique_id=1058936838]
-visible = false
-
-[node name="SubViewport" parent="Player/CanvasLayer/PlayerScreen/NonPixelatedViewport" index="0" unique_id=1788307729]
-render_target_update_mode = 0
-
-[node name="NonPixelatedCamera" parent="Player/CanvasLayer/PlayerScreen/NonPixelatedViewport/SubViewport" index="0" unique_id=1263349686]
-visible = false
-
-[node name="MeshInstance3D" parent="Player/CanvasLayer/PlayerScreen/NonPixelatedViewport/SubViewport/NonPixelatedCamera" index="0" unique_id=1353983340]
-visible = false
-material_override = SubResource("ShaderMaterial_y0c8p")
-
 [editable path="monitor2"]
-[editable path="Player"]

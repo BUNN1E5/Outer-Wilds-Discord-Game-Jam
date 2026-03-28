@@ -19,6 +19,7 @@ float opOnion( in float sdf, in float thickness ){
 }
 
 struct Ray{
+	vec3 origin;
 	float dist;
 	vec3 dir;
 	vec3 pos;

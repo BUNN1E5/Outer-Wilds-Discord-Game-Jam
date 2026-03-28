@@ -15,12 +15,9 @@ object_scale = 2.168
 sky_material = ExtResource("2_o54hj")
 star = NodePath("Star")
 bh = NodePath("BH")
-blackhole_pos = Vector3(165.16899, 0, -85.42524)
-blackhole_vel = Vector3(0.007859195, 0, -0.004060726)
 star_pos = Vector3(-1645.8768, 0, 852.10236)
 star_vel = Vector3(-0.07832512, 0, 0.040515073)
-blackhole_radius = 3.96747425657296e-08
-star_radius_a = 0.0010082218960000002
+star_radius_a = 0.001008221896
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=475577957]
 mesh = SubResource("SphereMesh_o54hj")

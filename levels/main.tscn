@@ -11,32 +11,38 @@ glow_intensity = 0.25
 
 [node name="Main" type="Node3D" unique_id=1257114819]
 
-[node name="RaymarchedBlackHole" parent="." unique_id=1903829489 node_paths=PackedStringArray("bh") instance=ExtResource("1_wdj6m")]
-sim_speed = 50.0
-AU_SCALE = 5000.0
-object_scale = 60.0
-bh_scale_mult = 50.0
-bh = NodePath("")
-blackhole_pos = Vector3(-0.07246, 0, 0)
-blackhole_vel = Vector3(0, 0, -0.00672)
-blackhole_radius = 0.054900474030068626
-star_pos = Vector3(0.72232, 0, 0)
-star_vel = Vector3(0, 0, 0.06703)
-star_radius_a = 1395.141
-ship_pos = Vector3(4148.715, 0, 194.42023)
-ship_vel = Vector3(0.90487325, 0, 0.042404495)
-
-[node name="Player" parent="." unique_id=195665807 instance=ExtResource("3_l8qe7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
-mouse_sensitivity = 0.005
-speed = 5.0
+[node name="RaymarchedBlackHole" parent="." unique_id=1903829489 node_paths=PackedStringArray("ship") instance=ExtResource("1_wdj6m")]
+transform = Transform3D(-0.8987964470941315, 0, 0.4383662243957285, 0, 1, 0, -0.4383662243957285, 0, -0.8987964470941315, 0, 0, 0)
+stationary_reference = true
+reference_object = 2
+sim_speed_inv = 20.0
+sim_speed = 0.05
+AU_SCALE = 2000.0
+object_scale = 11.933
+bh_scale_mult = 400.0
+ship = NodePath("../TestShip")
+bh_pos = Vector3(0.10357010773562966, 0, -0.10628562922934424)
+bh_vel = Vector3(0.0033659074469409014, 0, 0.0012484402509451587)
+bh_radius = 0.004367515710672059
+star_pos = Vector3(-1.032302686784149, 0, 1.061627039691602)
+star_vel = Vector3(-0.033550496809829494, 0, -0.01239735604974339)
+star_radius_a = 110.98811702
+ship_distance_to_bh = 0.2388441060783427
+ship_orbit_eliptical = 0.683
+bh_size_from_ship = 1000.0
+ship_pos = Vector3(0.18404084591041564, 0, -0.33116552452006975)
+ship_vel = Vector3(-0.044227543616721925, 0, -0.06802254163789712)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1719591188]
 environment = SubResource("Environment_l8qe7")
 
 [node name="TestShip" parent="." unique_id=1190936938 instance=ExtResource("1_2262g")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 20)
+transform = Transform3D(-0.9999999999999998, 0, 1.224646799147353e-16, 0, 1, 0, -1.224646799147353e-16, 0, -0.9999999999999998, 0, 0, 0)
 
-[editable path="TestShip"]
-[editable path="TestShip/monitor2"]
-[editable path="TestShip/Player"]
+[node name="Player" parent="." unique_id=195665807 instance=ExtResource("3_l8qe7")]
+transform = Transform3D(1, 0, 2.4492935982947064e-16, 0, 1, 0, -2.4492935982947064e-16, 0, 1, 0, 0, 0)
+visible = false
+mouse_sensitivity = 0.005
+speed = 2.0
+
+[editable path="Player"]

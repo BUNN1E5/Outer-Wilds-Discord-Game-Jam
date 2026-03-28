@@ -6,9 +6,11 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_merdl"]
 
-[node name="Player" type="CharacterBody3D" unique_id=195665807 node_paths=PackedStringArray("cameras")]
+[node name="Player" type="CharacterBody3D" unique_id=195665807 node_paths=PackedStringArray("cam")]
 script = ExtResource("1_symyc")
-cameras = [NodePath("PixelatedCamera")]
+mouse_sensitivity = 2.0
+speed = 0.005
+cam = NodePath("PixelatedCamera")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=801605889]
 layers = 4
@@ -18,5 +20,6 @@ mesh = SubResource("CapsuleMesh_u3f3p")
 shape = SubResource("CapsuleShape3D_merdl")
 
 [node name="PixelatedCamera" type="Camera3D" parent="." unique_id=260350728]
-cull_mask = 1
+cull_mask = 3
 current = true
+fov = 80.0

@@ -8,7 +8,7 @@ render_mode unshaded;
 
 uniform samplerCube sky_panorama : source_color, filter_linear_mipmap;
 
-uniform vec3 view_dir_offset = vec3(0);
+uniform mat3 rotation_offset_matrix;
 uniform float sky_panorama_brightness = 1.;
 
 uniform float star_radius = 1.;
@@ -22,7 +22,14 @@ uniform float MAX_DIST = 1000.;
 uniform int ITERATIONS = 10000;
 uniform float EPSILON = .001;
 
-Surface map(in vec3 p){
+uniform vec3 cam_vel_dir;
+uniform float cam_frac_of_lightspeed; //in speed of light
+uniform float sim_speed = 1.;
+uniform float doppler_intensity = 1.; //in speed of light
+
+uniform vec4 ship_angular_vel = vec4(1.);
+
+Surface map(in Ray r){
 	
 	Surface skybox;
 	skybox.dist = MAX_DIST;
@@ -33,23 +40,17 @@ Surface map(in vec3 p){
 	//bh.id = 1.;
 	
 	Surface star;
-	star.dist = sdSphere(p - star_center, star_radius);
+	//star.dist = sdSphere(p - star_center, star_radius);
+	//vec3 smear = vec3(cam_vel_dir.z, cam_vel_dir.y, cam_vel_dir.x) * star_radius * cam_frac_of_lightspeed * max(1.,sim_speed) * 50.;
+	vec3 smear = cross(ship_angular_vel.xyz * 2., star_center - r.origin) * cam_frac_of_lightspeed * sim_speed;
+	star.dist = sdCapsule(r.pos - star_center, smear*.5, -smear*.5, star_radius);
 	star.id = 2.;
 	return opUnion(star, skybox);
 }
 
-Surface vmap(in vec3 p){
-	Surface disk;
-	disk.dist = opSubtraction(
-		sdCappedCylinder(p - black_hole_center, Schwarzschild_radius * outer_radius, disc_width * .5),
-		sdCappedCylinder(p - black_hole_center, Schwarzschild_radius * inner_radius, disc_width * .5)
-	);
-	disk.id = 2.;
-	return disk;
-}
-
 Ray raymarch(vec3 ro, vec3 rd){
 	Ray r;
+	r.origin = ro;
 	r.dist = 0.;
 	r.iterations = 0;
 	r.hit = false;
@@ -62,7 +63,7 @@ Ray raymarch(vec3 ro, vec3 rd){
     
 	for( int i=0; i < ITERATIONS; i++ ){
 		r.iterations = i;
-        Surface sdf = map(r.pos);
+        Surface sdf = map(r);
 		float d = sdf.dist;
 		r.id = sdf.id;
 		
@@ -75,7 +76,7 @@ Ray raymarch(vec3 ro, vec3 rd){
         float r2 = dot(rel_p, rel_p);
         float r_len = sqrt(r2);
 		
-        if (r_len < Schwarzschild_radius * .1) {
+        if (r_len < Schwarzschild_radius * 2.6 * .1) {
             r.inside_bh = true;
 			return r;
         }
@@ -94,23 +95,14 @@ Ray raymarch(vec3 ro, vec3 rd){
 	return r;
 }
 
-void fragment() {
-	//vec3 ro = POSITION;
-	//vec3 rd = EYEDIR;
-	
-    vec2 uv = (FRAGCOORD.xy * 2. - VIEWPORT_SIZE.xy) / VIEWPORT_SIZE.y;
-	//ro = Ray Origin || rd = ray direction
-	vec3 ro = CAMERA_POSITION_WORLD;
-	vec3 rd = normalize((INV_VIEW_MATRIX * vec4(VERTEX, 1)).xyz - ro);
-	
-	Ray r = raymarch(ro, rd);
-	
+vec3 solveRayColor(Ray r, vec3 ro, vec2 screen_uv){
+	vec3 color = vec3(0);
 	if(r.inside_bh){
-		ALBEDO = vec3(0.0);
+		color = vec3(0.0);
 	} else if(r.hit){
 		float sun_mask = step(abs(2. - r.id), .5);
 		float bh_mask = step(abs(1. - r.id), .5);
-		ALBEDO += (star_color.rgb * sun_mask) * star_color.a;
+		color += (star_color.rgb * sun_mask) * star_color.a;
 	} else {
 		float dist_from_bh = length(ro - black_hole_center);
 		float safe_dist = max(dist_from_bh, Schwarzschild_radius + 0.001);
@@ -130,8 +122,44 @@ void fragment() {
 		sky_color.g *= pow(brightness, 2.0);
 		sky_color.b *= pow(brightness, 3.0); // Blue vanishes first
 
+
 		// Combine with a "Void" color
 		//COLOR = mix(vec3(0.0), sky_color * sky_panorama_brightness, 1.);
-		ALBEDO = sky_color;
+		color = sky_color;
 	}
+	return color;
+}
+
+void fragment() {
+	//vec3 ro = POSITION;
+	//vec3 rd = EYEDIR;
+	//mat3 rot_mat = mat3(
+		//vec3(cos(a)*cos(b),cos(a)*sin(b)*sin(y) - sin(a)*cos(y), cos(a)*cos(b)*cos(y) + sin(a)*sin(y)),
+		//vec3(sin(a)*cos(b), sin(a)*sin(b)*sin(y)+cos(a)*cos(y), sin(a)*sin(b)*cos(y)-cos(y)*sin(y)),
+		//vec3(-sin(b), cos(b)*sin(y), cos(b)*cos(y)));
+	
+	
+    vec2 uv = (FRAGCOORD.xy * 2. - VIEWPORT_SIZE.xy) / VIEWPORT_SIZE.y;
+	//ro = Ray Origin || rd = ray direction
+	vec3 ro = CAMERA_POSITION_WORLD;
+	//vec3 rd = normalize((INV_VIEW_MATRIX * vec4(VERTEX, 1)).xyz - ro);
+	vec3 rd = normalize((INV_VIEW_MATRIX * vec4(VERTEX, 0.)).xyz);
+	rd = rotation_offset_matrix * rd * vec3(-1);
+	ro = rotation_offset_matrix * ro;
+	Ray r = raymarch(ro, rd);
+	ALBEDO = solveRayColor(r, ro, SCREEN_UV);
+	
+	
+	
+		//Relatavistic Beaming	
+	//Theta is the angle between the camera position and the ray position
+	float cos_theta = dot(cam_vel_dir, rd);
+	//D = 1/(1-Bcos(theta)*y
+	float beta = cam_frac_of_lightspeed * doppler_intensity;
+	//Lorentz factor (y)
+	float lorentz = 1./sqrt(1.-(beta*beta));
+	float doppler = 1./((1.-beta*cos_theta)*lorentz);
+	float intensity = pow(doppler, 3.);
+	
+	ALBEDO *= intensity;
 }

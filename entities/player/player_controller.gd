@@ -5,13 +5,11 @@ extends CharacterBody3D
 
 var camera_rotation_x : float = 0.0
 var mouse_lock : bool = true
-@export var cameras : Array[Camera3D]
+@export var cam : Camera3D
 
 
 func _ready() -> void:
 	mouse_lock = false
-	cameras.append($CanvasLayer/PlayerScreen/PixelatedViewport/SubViewport/PixelatedCamera)
-	cameras.append($CanvasLayer/PlayerScreen/NonPixelatedViewport/SubViewport/NonPixelatedCamera)
 	pass
 
 func _input(event: InputEvent) -> void:
@@ -22,14 +20,13 @@ func _input(event: InputEvent) -> void:
 		if(!mouse_lock): return
 		var x_delta = -event.relative.y * mouse_sensitivity
 		camera_rotation_x = clamp(camera_rotation_x + x_delta, -deg_to_rad(85), deg_to_rad(85))
-		for cam in cameras:
-			cam.rotation.y -= event.relative.x * mouse_sensitivity
-			cam.rotation.x = camera_rotation_x
+		cam.rotation.y -= event.relative.x * mouse_sensitivity
+		cam.rotation.x = camera_rotation_x
 	
 
 func _physics_process(delta: float) -> void:
 	var input_dir = Input.get_vector("move_left", "move_right", "move_forward", "move_back")
-	var direction = (cameras[0].basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction = (cam.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	
 	velocity.x = direction.x * speed;
 	velocity.z = direction.z * speed;
@@ -38,6 +35,5 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
-	for cam in cameras:
-			cam.position = position
+	cam.position = position
 	pass

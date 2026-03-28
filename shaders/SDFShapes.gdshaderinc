@@ -58,8 +58,14 @@ float sdPlane( vec3 p, vec3 n, float h ){
   return dot(p,n) + h;
 }
 
+float sdCapsule( vec3 p, vec3 a, vec3 b, float r ){
+  vec3 pa = p - a, ba = b - a;
+  float h = clamp( dot(pa,ba)/dot(ba,ba), 0.0, 1.0 );
+  return length( pa - ba*h ) - r;
+}
+
 const int SHAPE_CAPSULE = 9;
-float sdCapsule( vec3 p, float h, float r ){
+float sdVerticalCapsule( vec3 p, float h, float r ){
   p.y -= clamp( p.y, -h/2., h/2. );
   return length( p ) - r;
 }
