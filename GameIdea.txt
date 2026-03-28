@@ -5,52 +5,52 @@ We can use any 2
 Themes : Plot Twist, Isolation, 14.3 Billion Years
 
 Idea :: Themes Used :: Isolation, 14.3 Billion Years
-    - On a research vessel near a black hole lets say Gaia BH1 (The closest black hole to earth)
-        - Story/Setting:
-            - You are a researcher on a vessel orbiting a black hole, everything is fine for X minutes when suddenly
-                the entire ship shakes, alarms go off you are now falling into a black hole instead of being in a stable orbit
-            - We have X minutes before we reach the even horizon, those X minutes will cover billions of years
-            - We are doomed, there is nothing we can do to escape our fate, thrusters are dead...
-            -
-            - As you get closer to the event horizon the stars start to turn blue
-                - Except behind you which turn red...
-            - You enter the photon sphere
-            - You have hit the event horizon, everything goes quiet. The alarms stop, the lights stop flashing
-            - After about 30 seconds, everything starts to stretch toward the black hole then everything goes black
-        - Mechanics:
-            - First Person with many consoles and screens
-                -- Potentially a window to the black hole, IF I can figure out a shader in time
-                    -- Raymarching? If I do this how do I mix with the rest of the scene?
-            - Big question... WHAT DO WE DO?
-                -- We want to send out as much information as possible
-                    - Use the terminals to record data send packets out
-                        -- Resources are limited
-                            - Limited TOTAL power (we wont ever run out, but we can only use a couple things at once)
-                            - Limited Packet size (what we are able to send in a single message)
-                            - What else...
-                    - are we graded on this?
-                        -- If so how?
-                        -- Maybe an end report from an alien species that summerized what you sent out?
-                            - Is this feasable?
-                        -- Maybe not? Just let the story be its own thing, you as the reasercher does not get to see the results
-                            of your own research?
-                -- If thrusters are dead maybe there is a way to repair them?
-                    - Probably goes against the themes of the game... No matter what you are isolated.
-        - Enviroment:
-            - Time Dialation occurs the closer you get to the hole
-                -- Gravitational Time Dialation is :: dt_bh = dt_e * sqrt(1 - 2GM/rc^2)
-                    -- G = Gravitation Constant
-                    -- M = mass of black hole
-                    -- r = distance to center of black hole
-                    -- c = speed of light
-            - Time limit? Until we reach the event horizon?
-                -- We can have this point be when we are truly alone
-            - Monitor has age of earth and stages of the Solar System at home
-                    -- Sun Gors Red Giant in 5 Billion years
-                    -- Our Universe is 13.863 Billion years old
+	- On a research vessel near a black hole lets say Gaia BH1 (The closest black hole to earth)
+		- Story/Setting:
+			- You are a researcher on a vessel orbiting a black hole, everything is fine for X minutes when suddenly
+				the entire ship shakes, alarms go off you are now falling into a black hole instead of being in a stable orbit
+			- We have X minutes before we reach the even horizon, those X minutes will cover billions of years
+			- We are doomed, there is nothing we can do to escape our fate, thrusters are dead...
+			-
+			- As you get closer to the event horizon the stars start to turn blue
+				- Except behind you which turn red...
+			- You enter the photon sphere
+			- You have hit the event horizon, everything goes quiet. The alarms stop, the lights stop flashing
+			- After about 30 seconds, everything starts to stretch toward the black hole then everything goes black
+		- Mechanics:
+			- First Person with many consoles and screens
+				-- Potentially a window to the black hole, IF I can figure out a shader in time
+					-- Raymarching? If I do this how do I mix with the rest of the scene?
+			- Big question... WHAT DO WE DO?
+				-- We want to send out as much information as possible
+					- Use the terminals to record data send packets out
+						-- Resources are limited
+							- Limited TOTAL power (we wont ever run out, but we can only use a couple things at once)
+							- Limited Packet size (what we are able to send in a single message)
+							- What else...
+					- are we graded on this?
+						-- If so how?
+						-- Maybe an end report from an alien species that summerized what you sent out?
+							- Is this feasable?
+						-- Maybe not? Just let the story be its own thing, you as the reasercher does not get to see the results
+							of your own research?
+				-- If thrusters are dead maybe there is a way to repair them?
+					- Probably goes against the themes of the game... No matter what you are isolated.
+		- Enviroment:
+			- Time Dialation occurs the closer you get to the hole
+				-- Gravitational Time Dialation is :: dt_bh = dt_e * sqrt(1 - 2GM/rc^2)
+					-- G = Gravitation Constant
+					-- M = mass of black hole
+					-- r = distance to center of black hole
+					-- c = speed of light
+			- Time limit? Until we reach the event horizon?
+				-- We can have this point be when we are truly alone
+			- Monitor has age of earth and stages of the Solar System at home
+					-- Sun Gors Red Giant in 5 Billion years
+					-- Our Universe is 13.863 Billion years old
 References ::
-    - https://www.youtube.com/watch?v=chhcwk4-esM
-    - https://www.youtube.com/watch?v=z-H-PipYCKc
-    - https://www.youtube.com/watch?v=4rTv9wvvat8
-    - https://www.youtube.com/watch?v=17tEg_uTF_A
-    - https://en.wikipedia.org/wiki/Gaia_BH1
+	- https://www.youtube.com/watch?v=chhcwk4-esM
+	- https://www.youtube.com/watch?v=z-H-PipYCKc
+	- https://www.youtube.com/watch?v=4rTv9wvvat8
+	- https://www.youtube.com/watch?v=17tEg_uTF_A
+	- https://en.wikipedia.org/wiki/Gaia_BH1

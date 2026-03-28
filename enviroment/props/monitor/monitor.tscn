@@ -5,19 +5,24 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3101b"]
 albedo_color = Color(0.23529412, 0.23529412, 0.23529412, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fey6a"]
+emission_enabled = true
+emission = Color(0.6955359, 0.6955359, 0.6955359, 1)
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_fey6a"]
 
 [node name="monitor" unique_id=1609047966 instance=ExtResource("1_3101b")]
 
-[node name="Cube" parent="." index="0" unique_id=382434433]
-material_override = SubResource("StandardMaterial3D_3101b")
+[node name="Cube" parent="." index="0" unique_id=1943351845]
+material_overlay = SubResource("StandardMaterial3D_3101b")
 
 [node name="Screen" type="MeshInstance3D" parent="." index="1" unique_id=1138155329]
 transform = Transform3D(0.879, 0, 0, 0, 0.879, 0, 0, 0, 0.879, 0, 0.074127376, 0)
 layers = 2
+material_overlay = SubResource("StandardMaterial3D_fey6a")
 mesh = SubResource("PlaneMesh_fey6a")
 
 [node name="Screen2" type="MeshInstance3D" parent="." index="2" unique_id=1682064275]
 transform = Transform3D(0.879, 0, 0, 0, 0.879, 0, 0, 0, 0.879, 0, 0.06315416, 0)
-layers = 2
+layers = 3
 mesh = SubResource("PlaneMesh_fey6a")

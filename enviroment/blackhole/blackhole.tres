@@ -1,7 +1,6 @@
 [gd_resource type="Environment" format=3 uid="uid://gmpodbf07xdy"]
 
-[ext_resource type="Shader" uid="uid://bowf6umcpg54l" path="res://shaders/BlackHoleWithSkybox.gdshader" id="1_g8v8w"]
-[ext_resource type="Texture2D" uid="uid://ds305qy4oqbtr" path="res://enviroment/skybox/milkyway_2020_16k.exr" id="2_pevor"]
+[ext_resource type="Shader" uid="uid://bowf6umcpg54l" path="res://enviroment/blackhole/shaders/BlackHoleWithSkybox.gdshader" id="1_g8v8w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0u7g"]
 shader = ExtResource("1_g8v8w")
@@ -14,8 +13,10 @@ shader_parameter/doppler_beaming_factor = 66.0
 shader_parameter/hue_radius = 0.75
 shader_parameter/hue_shift_factor = -0.03
 shader_parameter/Schwarzschild_radius = 2.819
-shader_parameter/sky_panorama_2d = ExtResource("2_pevor")
 shader_parameter/sky_panorama_brightness = 1.0
+shader_parameter/star_radius = 1.0
+shader_parameter/star_center = Vector3(1, 1, 1)
+shader_parameter/star_color = Color(0, 0, 0, 1)
 shader_parameter/black_hole_center = Vector3(1, 0, -50)
 shader_parameter/near_bh_step_mult = 0.1
 shader_parameter/MAX_DIST = 500.0

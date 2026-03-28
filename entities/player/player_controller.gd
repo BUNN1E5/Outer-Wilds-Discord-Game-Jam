@@ -9,8 +9,7 @@ var mouse_lock : bool = true
 
 
 func _ready() -> void:
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	mouse_lock = true
+	mouse_lock = false
 	cameras.append($CanvasLayer/PlayerScreen/PixelatedViewport/SubViewport/PixelatedCamera)
 	cameras.append($CanvasLayer/PlayerScreen/NonPixelatedViewport/SubViewport/NonPixelatedCamera)
 	pass
@@ -34,10 +33,6 @@ func _physics_process(delta: float) -> void:
 	
 	velocity.x = direction.x * speed;
 	velocity.z = direction.z * speed;
-	
-	print(velocity)
-	#if(!is_on_floor()):
-	#	velocity.y += -9.8;
 	
 	move_and_slide()
 

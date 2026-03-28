@@ -1,0 +1,27 @@
+[remap]
+
+importer="cubemap_texture"
+type="CompressedCubemap"
+uid="uid://lfgklgsp6yhg"
+path="res://.godot/imported/starmap_2020_16k.jpg-dc199f2e2f9ded249989bb1448315115.ccube"
+metadata={
+"vram_texture": false
+}
+
+[deps]
+
+source_file="res://enviroment/skybox/starmap_2020_16k.jpg"
+dest_files=["res://.godot/imported/starmap_2020_16k.jpg-dc199f2e2f9ded249989bb1448315115.ccube"]
+
+[params]
+
+compress/mode=0
+compress/high_quality=false
+compress/lossy_quality=0.7
+compress/uastc_level=0
+compress/rdo_quality_loss=0.0
+compress/hdr_compression=1
+compress/channel_pack=0
+mipmaps/generate=false
+mipmaps/limit=-1
+slices/arrangement=2
