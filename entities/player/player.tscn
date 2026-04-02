@@ -1,18 +1,24 @@
 [gd_scene format=3 uid="uid://rlhfhpkbt0nl"]
 
 [ext_resource type="Script" uid="uid://crskn7j16howk" path="res://entities/player/player_controller.gd" id="1_symyc"]
+[ext_resource type="PackedScene" uid="uid://cmvgbq7vi1svl" path="res://entities/player/arms/arms.tscn" id="2_abrql"]
+[ext_resource type="PackedScene" uid="uid://dcgdujq1gnptf" path="res://entities/player/interactables/interactable_gui.tscn" id="3_sglur"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u3f3p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_merdl"]
 
-[node name="Player" type="CharacterBody3D" unique_id=195665807 node_paths=PackedStringArray("cam")]
+[node name="Player" type="CharacterBody3D" unique_id=195665807 node_paths=PackedStringArray("raycast", "cam", "left_hand", "right_hand")]
+collision_layer = 2
 script = ExtResource("1_symyc")
 mouse_sensitivity = 2.0
-speed = 0.005
+raycast = NodePath("PixelatedCamera/RayCast3D")
 cam = NodePath("PixelatedCamera")
+left_hand = NodePath("PixelatedCamera/arms/handL")
+right_hand = NodePath("PixelatedCamera/arms/handR")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=801605889]
+visible = false
 layers = 4
 mesh = SubResource("CapsuleMesh_u3f3p")
 
@@ -20,6 +26,49 @@ mesh = SubResource("CapsuleMesh_u3f3p")
 shape = SubResource("CapsuleShape3D_merdl")
 
 [node name="PixelatedCamera" type="Camera3D" parent="." unique_id=260350728]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 cull_mask = 3
 current = true
 fov = 80.0
+
+[node name="RayCast3D" type="RayCast3D" parent="PixelatedCamera" unique_id=222632064]
+target_position = Vector3(0, 0, -3)
+
+[node name="arms" parent="PixelatedCamera" unique_id=1057050225 instance=ExtResource("2_abrql")]
+transform = Transform3D(-1, 0, -1.2246467991473532e-16, 0, 1, 0, 1.2246467991473532e-16, 0, -1, 0, -1.5053712738479992, 0.13666723453476415)
+
+[node name="handR" parent="PixelatedCamera/arms" index="1" unique_id=2008711126]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32994354267969705, 0.9485372876556062, 0.3306753180774713)
+
+[node name="handL" parent="PixelatedCamera/arms" index="2" unique_id=1221481169]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2627422496318976, 0.8990828891140027, 0.19363560692947177)
+
+[node name="interactable_gui" parent="." unique_id=205160128 instance=ExtResource("3_sglur")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+length = 15.0
+width = 5.0
+color = Color(0.74509805, 0.20392157, 0.16470589, 1)
+
+[node name="ColorRect" type="ColorRect" parent="interactable_gui" unique_id=1154325682]
+custom_minimum_size = Vector2(1, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -2.5
+offset_right = 2.5
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[editable path="PixelatedCamera/arms"]

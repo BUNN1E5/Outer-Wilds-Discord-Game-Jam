@@ -10,7 +10,6 @@ uniform vec4  disc_color : source_color = vec4(1.0, 0.0, 0.0, 1.0);
 uniform float doppler_beaming_factor = 66.0;
 uniform float hue_radius = 0.75;           // radial point where hue shift starts (0–1)
 uniform float hue_shift_factor = -0.03;     // amount of hue shift
-uniform float Schwarzschild_radius = 1.0;  // must match the main shader's uniform
 
 // Helper functions (ported from Unity HLSL)
 float remap(float v, float minOld, float maxOld, float minNew, float maxNew) {
@@ -82,34 +81,4 @@ vec3 discColor(vec3 baseColor, vec3 planarDiscPos, vec3 discDir, vec3 cameraPos,
     newColor = HSVToRGB(hueColor);
 
     return newColor;
-}
-
-struct VolumeSample {
-    vec3 emission;
-    float density;
-};
-
-VolumeSample sample_disk_volume(vec3 rel_p, vec3 view_dir, vec3 camera_pos) {
-    VolumeSample samp;
-    samp.emission = vec3(0.0);
-    samp.density = 0.0;
-
-    // Convert radii to world units (they are multipliers of Schwarzschild radius)
-    float world_inner = inner_radius * Schwarzschild_radius;
-    float world_outer = outer_radius * Schwarzschild_radius;
-
-    float rad = length(rel_p.xz);
-    float height = abs(rel_p.y);
-    float angle = atan(rel_p.z, rel_p.x);
-
-    // Disc bounds (using disc_width as total thickness)
-    if (rad < world_inner || rad > world_outer || height > disc_width * 0.5)
-        return samp;
-	float t = (rad - world_inner) / (world_outer - world_inner);
-	vec3 simpleColor = mix(vec3(1.0, 0.0, 0.0), vec3(0.0, 0.0, 1.0), t);
-
-	// Set emission and density
-	samp.emission = disc_color.rgb * 10.0; // HDR bright
-	samp.density = 5.0;
-	return samp;
 }

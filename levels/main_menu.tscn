@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bdfcd3dpd48xt"]
+
+[sub_resource type="SystemFont" id="SystemFont_spmat"]
+
+[sub_resource type="Theme" id="Theme_0ettg"]
+default_font = SubResource("SystemFont_spmat")
+default_font_size = 172
+
+[node name="MainMenu" type="Control" unique_id=309094032]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HSplitContainer" type="HSplitContainer" parent="." unique_id=416636327]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer" unique_id=1044997726]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="HSplitContainer/VBoxContainer" unique_id=1095594244]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Test"
+
+[node name="CenterContainer" type="CenterContainer" parent="HSplitContainer" unique_id=99231613]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="HSplitContainer/CenterContainer" unique_id=1602533231]
+layout_mode = 2
+theme = SubResource("Theme_0ettg")
+text = "Gaia BH1"

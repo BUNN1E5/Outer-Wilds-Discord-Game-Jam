@@ -1,29 +1,87 @@
 [gd_scene format=3 uid="uid://cka4uavekheii"]
 
-[ext_resource type="Script" uid="uid://c7ex42ubg4oak" path="res://enviroment/blackhole/OrbitManager.gd" id="1_g0u7g"]
+[ext_resource type="Script" uid="uid://c7ex42ubg4oak" path="res://enviroment/blackhole/orbit_manager.gd" id="1_g0u7g"]
 [ext_resource type="Material" uid="uid://d1xlrydr8w0tr" path="res://enviroment/blackhole/SkyMaterial.tres" id="2_o54hj"]
+[ext_resource type="Script" uid="uid://huutvdn7seab" path="res://enviroment/blackhole/celestial_body.gd" id="3_g0u7g"]
+[ext_resource type="Script" uid="uid://17omlwbv3b52" path="res://helpers/date.gd" id="4_7xp8q"]
+
+[sub_resource type="Resource" id="Resource_7xp8q"]
+script = ExtResource("3_g0u7g")
+position = Vector3(0.16956801066419155, 0, 0.05765137310058446)
+last_position = Vector3(0.16957822104604217, 0, 0.05763358488148438)
+radius = 1.8300158010022877e-07
+mass = 9.27
+velocity = Vector3(-0.0014255221856807464, 0, 0.0024835017281342542)
+
+[sub_resource type="Resource" id="Resource_djqko"]
+script = ExtResource("3_g0u7g")
+position = Vector3(-1.6691165114543558, 0, -0.5337524667081617)
+last_position = Vector3(-1.6692190198544965, 0, -0.5335782104569943)
+radius = 0.00465047
+mass = 0.93
+velocity = Vector3(0.0143117075107601, 0, -0.024328781789652226)
+
+[sub_resource type="Resource" id="Resource_uprfh"]
+script = ExtResource("3_g0u7g")
+position = Vector3(0.16515518493011472, 0, 0.05421720749278737)
+last_position = Vector3(0.17112571789394013, 0, 0.044930332072372584)
+mass = 200000.0
+velocity = Vector3(-0.35823197782952454, 0, 0.5572125252248872)
+sub_steps = 83
+
+[sub_resource type="Resource" id="Resource_kxtwn"]
+script = ExtResource("4_7xp8q")
+seconds = 2524609039.885734
+second = 19
+minute = 17
+day = 1
+month = 1
+year = 2050
+
+[sub_resource type="Resource" id="Resource_12tpv"]
+script = ExtResource("4_7xp8q")
+seconds = 2529807524.2878265
+second = 44
+minute = 18
+hour = 4
+day = 2
+month = 3
+year = 2050
 
 [sub_resource type="SphereMesh" id="SphereMesh_o54hj"]
 material = ExtResource("2_o54hj")
 radius = 1000.0
 height = 2000.0
 
-[node name="RaymarchedBlackHole" type="Node3D" unique_id=1903829489 node_paths=PackedStringArray("star", "bh")]
+[node name="RaymarchedBlackHole" type="Node3D" unique_id=666130988 node_paths=PackedStringArray("star_node", "bh_node", "ship_node")]
+transform = Transform3D(-0.8987964470941315, 0, 0.4383662243957285, 0, 1, 0, -0.4383662243957285, 0, -0.8987964470941315, 0, 0, 0)
 script = ExtResource("1_g0u7g")
-sim_speed = 200.0
-object_scale = 2.168
+stationary_reference = true
+sim_speed = 1.0
+AU_SCALE = 10000.0
+object_scale = 11.933
+bh_scale_mult = 100.0
 sky_material = ExtResource("2_o54hj")
-star = NodePath("Star")
-bh = NodePath("BH")
-star_pos = Vector3(-1645.8768, 0, 852.10236)
-star_vel = Vector3(-0.07832512, 0, 0.040515073)
-star_radius_a = 0.001008221896
+star_node = NodePath("Star")
+bh_node = NodePath("BH")
+ship_node = NodePath("Ship")
+bh = SubResource("Resource_7xp8q")
+bh_radius_world = 2.18375785533603
+star = SubResource("Resource_djqko")
+star_radius_world = 554.9405851
+ship_distance_to_bh = 0.005591647733996407
+ship = SubResource("Resource_uprfh")
+bh_size_from_ship = 0.011805
+ship_time = SubResource("Resource_kxtwn")
+earth_time = SubResource("Resource_12tpv")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=475577957]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=451529305]
 mesh = SubResource("SphereMesh_o54hj")
 
-[node name="BH" type="Node3D" parent="." unique_id=12951822]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5169, 0, -8.542524)
+[node name="BH" type="Node3D" parent="." unique_id=223634054]
 
-[node name="Star" type="Node3D" parent="." unique_id=1374792658]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -164.58769, 0, 85.210236)
+[node name="Star" type="Node3D" parent="." unique_id=1530391312]
+transform = Transform3D(-0.3957299534423225, 0, -0.9183669222857154, 0, 1, 0, 0.9183669222857154, 0, -0.3957299534423225, -18386.84522118547, 0, -5914.038398087461)
+
+[node name="Ship" type="Node3D" parent="." unique_id=340462803]
+transform = Transform3D(-0.6141598632756966, 0, -0.7891816409047903, 0, 1, 0, 0.7891816409047903, 0, -0.6141598632756966, -44.12825734076837, 0, -34.34165607797094)

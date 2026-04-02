@@ -16,6 +16,8 @@ uniform vec3 star_center = vec3(1.);
 uniform vec4 star_color : source_color;
 
 uniform vec3 black_hole_center = vec3(0,0,0);
+uniform float Schwarzschild_radius = 1.0;  // must match the main shader's uniform
+
 uniform float near_bh_step_mult = .05;
 
 uniform float MAX_DIST = 1000.;
@@ -27,7 +29,7 @@ uniform float cam_frac_of_lightspeed; //in speed of light
 uniform float sim_speed = 1.;
 uniform float doppler_intensity = 1.; //in speed of light
 
-uniform vec4 ship_angular_vel = vec4(1.);
+uniform vec3 ship_angular_vel = vec3(1.);
 
 Surface map(in Ray r){
 	
@@ -41,9 +43,9 @@ Surface map(in Ray r){
 	
 	Surface star;
 	//star.dist = sdSphere(p - star_center, star_radius);
-	//vec3 smear = vec3(cam_vel_dir.z, cam_vel_dir.y, cam_vel_dir.x) * star_radius * cam_frac_of_lightspeed * max(1.,sim_speed) * 50.;
-	vec3 smear = cross(ship_angular_vel.xyz * 2., star_center - r.origin) * cam_frac_of_lightspeed * sim_speed;
+	vec3 smear = cross(ship_angular_vel.xyz * 2., star_center - r.origin) * pow(cam_frac_of_lightspeed, .05) * sim_speed; 
 	star.dist = sdCapsule(r.pos - star_center, smear*.5, -smear*.5, star_radius);
+	
 	star.id = 2.;
 	return opUnion(star, skybox);
 }
@@ -59,8 +61,7 @@ Ray raymarch(vec3 ro, vec3 rd){
 	r.pos = ro + rd * r.dist; //position along ray
 	r.dir = rd;
 	r.transmittance = 1.;
-	r.vol_color = vec3(0.,0.,0.);
-    
+	
 	for( int i=0; i < ITERATIONS; i++ ){
 		r.iterations = i;
         Surface sdf = map(r);
@@ -76,7 +77,7 @@ Ray raymarch(vec3 ro, vec3 rd){
         float r2 = dot(rel_p, rel_p);
         float r_len = sqrt(r2);
 		
-        if (r_len < Schwarzschild_radius * 2.6 * .1) {
+        if (r_len < Schwarzschild_radius * .1) {
             r.inside_bh = true;
 			return r;
         }
@@ -113,14 +114,15 @@ vec3 solveRayColor(Ray r, vec3 ro, vec2 screen_uv){
 		
 		// Convert ray direction to Equirectangular UVs
 		//vec2 sky_uv = vec2(atan(r.dir.z, r.dir.x) * 0.1591549 + 0.5, acos(r.dir.y) * 0.3183098);
-		vec3 sky_color = texture(sky_panorama, r.dir).rgb * sky_panorama_brightness;
+		float blur_amount = float(r.iterations) * .0015;
+		vec3 sky_color = texture(sky_panorama, r.dir, blur_amount).rgb * sky_panorama_brightness;
 		
 		// Use g_shift to fade the brightness as you go deeper
 		float brightness = clamp(1.0 / g_shift, 0.0, 1.0);
 
-		sky_color.r *= brightness; // Red stays longest
-		sky_color.g *= pow(brightness, 2.0);
-		sky_color.b *= pow(brightness, 3.0); // Blue vanishes first
+		//sky_color.r *= brightness; // Red stays longest
+		//sky_color.g *= pow(brightness, 2.0);
+		//sky_color.b *= pow(brightness, 3.0); // Blue vanishes first
 
 
 		// Combine with a "Void" color
@@ -146,10 +148,9 @@ void fragment() {
 	vec3 rd = normalize((INV_VIEW_MATRIX * vec4(VERTEX, 0.)).xyz);
 	rd = rotation_offset_matrix * rd * vec3(-1);
 	ro = rotation_offset_matrix * ro;
+	
 	Ray r = raymarch(ro, rd);
 	ALBEDO = solveRayColor(r, ro, SCREEN_UV);
-	
-	
 	
 		//Relatavistic Beaming	
 	//Theta is the angle between the camera position and the ray position
@@ -157,9 +158,8 @@ void fragment() {
 	//D = 1/(1-Bcos(theta)*y
 	float beta = cam_frac_of_lightspeed * doppler_intensity;
 	//Lorentz factor (y)
-	float lorentz = 1./sqrt(1.-(beta*beta));
-	float doppler = 1./((1.-beta*cos_theta)*lorentz);
-	float intensity = pow(doppler, 3.);
-	
-	ALBEDO *= intensity;
+	//float lorentz = 1./sqrt(1.-(beta));
+	//float doppler = 1./((1.-beta*cos_theta)*lorentz);
+	//float intensity = pow(doppler, 3.);
+	//ALBEDO *= intensity;
 }

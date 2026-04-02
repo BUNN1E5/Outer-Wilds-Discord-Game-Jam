@@ -1,9 +1,20 @@
 [gd_scene format=3 uid="uid://djhqy1cg0w771"]
 
 [ext_resource type="PackedScene" uid="uid://djm07mtqfuu1x" path="res://enviroment/props/monitor/monitor.tscn" id="1_lokjw"]
+[ext_resource type="PackedScene" uid="uid://rlhfhpkbt0nl" path="res://entities/player/player.tscn" id="2_vh8cc"]
+[ext_resource type="Script" uid="uid://bg8daxcasdqhy" path="res://entities/interactable/interactable.gd" id="3_thk3k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vh8cc"]
 albedo_color = Color(0.7294118, 0.23529412, 0.6745098, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wawrf"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thk3k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_if52q"]
+material = SubResource("StandardMaterial3D_thk3k")
+size = Vector3(0.5, 0.5, 0.5)
 
 [node name="TestShip" type="Node3D" unique_id=1190936938]
 
@@ -49,5 +60,30 @@ material_override = SubResource("StandardMaterial3D_vh8cc")
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=312702938]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33974266, 0)
 layers = 3
+
+[node name="Player" parent="." unique_id=195665807 instance=ExtResource("2_vh8cc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22123571717034007, -0.4946286384685197, -0.08474841695968638)
+mouse_sensitivity = 0.01
+run_accel = 20.0
+
+[node name="RigidBody3D2" type="RigidBody3D" parent="." unique_id=1079996241]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24582888313027285, 0, 1.8266468517389847)
+script = ExtResource("3_thk3k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D2" unique_id=592521493]
+shape = SubResource("BoxShape3D_wawrf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D2" unique_id=21542727]
+mesh = SubResource("BoxMesh_if52q")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="." unique_id=754512111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4980000000068685, 0, 0.3239999999932479)
+script = ExtResource("3_thk3k")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D" unique_id=138021302]
+shape = SubResource("BoxShape3D_wawrf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D" unique_id=1390512688]
+mesh = SubResource("BoxMesh_if52q")
 
 [editable path="monitor2"]

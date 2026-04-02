@@ -2,9 +2,9 @@ We can use any 2
 
 - 14.3 Billion Years is a reference to the ending Song for Outer Wilds
 
-Themes : Plot Twist, Isolation, 14.3 Billion Years
+Themes : Isolation, 14.3 Billion Years, Consciousness and identity through awe and wonder
 
-Idea :: Themes Used :: Isolation, 14.3 Billion Years
+Idea :: Themes Used :: Isolation, 14.3 Billion Years, Consciousness and identity through awe and wonder
 	- On a research vessel near a black hole lets say Gaia BH1 (The closest black hole to earth)
 		- Story/Setting:
 			- You are a researcher on a vessel orbiting a black hole, everything is fine for X minutes when suddenly
@@ -19,9 +19,19 @@ Idea :: Themes Used :: Isolation, 14.3 Billion Years
 			- After about 30 seconds, everything starts to stretch toward the black hole then everything goes black
 		- Mechanics:
 			- First Person with many consoles and screens
+
 				-- Potentially a window to the black hole, IF I can figure out a shader in time
 					-- Raymarching? If I do this how do I mix with the rest of the scene?
 			- Big question... WHAT DO WE DO?
+				-- We have hunger, and sleep (Voices of the void)
+				-- If we need food, we have to go to the warehouse and grab a box
+				-- Lets have lots of physics objects
+				-- We have tasks to complete each day
+					-- Example tasks:
+						-- Receive
+						-- Take a pixture of black hole at periapsis
+						-- Take a pixture of black hole at occultation
+						-- Send the Signal back to earth
 				-- We want to send out as much information as possible
 					- Use the terminals to record data send packets out
 						-- Resources are limited

@@ -36,6 +36,12 @@ float sdTorus( vec3 p, vec2 t ){
   return length(q)-t.y;
 }
 
+float sdCappedTorus( vec3 p, vec2 sc, float ra, float rb){
+  p.x = abs(p.x);
+  float k = (sc.y*p.x>sc.x*p.y) ? dot(p.xy,sc) : length(p.xy);
+  return sqrt( dot(p,p) + ra*ra - 2.0*ra*k ) - rb;
+}
+
 const int SHAPE_CONE = 6;
 float sdCone( vec3 p, vec2 c, float h ){
   float q = length(p.xz);

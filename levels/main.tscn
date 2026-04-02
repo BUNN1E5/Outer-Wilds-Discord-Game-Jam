@@ -2,7 +2,8 @@
 
 [ext_resource type="PackedScene" uid="uid://djhqy1cg0w771" path="res://enviroment/ship/test_ship.tscn" id="1_2262g"]
 [ext_resource type="PackedScene" uid="uid://cka4uavekheii" path="res://enviroment/blackhole/raymarched_black_hole.tscn" id="1_wdj6m"]
-[ext_resource type="PackedScene" uid="uid://rlhfhpkbt0nl" path="res://entities/player/player.tscn" id="3_l8qe7"]
+[ext_resource type="PackedScene" uid="uid://rlhfhpkbt0nl" path="res://entities/player/player.tscn" id="4_m1504"]
+[ext_resource type="PackedScene" uid="uid://6667ycj0q0cj" path="res://entities/monitor/orbit_display/orbit_display.tscn" id="5_ifaiv"]
 
 [sub_resource type="Environment" id="Environment_l8qe7"]
 glow_enabled = true
@@ -11,38 +12,33 @@ glow_intensity = 0.25
 
 [node name="Main" type="Node3D" unique_id=1257114819]
 
-[node name="RaymarchedBlackHole" parent="." unique_id=1903829489 node_paths=PackedStringArray("ship") instance=ExtResource("1_wdj6m")]
-transform = Transform3D(-0.8987964470941315, 0, 0.4383662243957285, 0, 1, 0, -0.4383662243957285, 0, -0.8987964470941315, 0, 0, 0)
-stationary_reference = true
-reference_object = 2
-sim_speed_inv = 20.0
-sim_speed = 0.05
-AU_SCALE = 2000.0
-object_scale = 11.933
-bh_scale_mult = 400.0
-ship = NodePath("../TestShip")
-bh_pos = Vector3(0.10357010773562966, 0, -0.10628562922934424)
-bh_vel = Vector3(0.0033659074469409014, 0, 0.0012484402509451587)
-bh_radius = 0.004367515710672059
-star_pos = Vector3(-1.032302686784149, 0, 1.061627039691602)
-star_vel = Vector3(-0.033550496809829494, 0, -0.01239735604974339)
-star_radius_a = 110.98811702
-ship_distance_to_bh = 0.2388441060783427
-ship_orbit_eliptical = 0.683
-bh_size_from_ship = 1000.0
-ship_pos = Vector3(0.18404084591041564, 0, -0.33116552452006975)
-ship_vel = Vector3(-0.044227543616721925, 0, -0.06802254163789712)
-
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1719591188]
 environment = SubResource("Environment_l8qe7")
 
 [node name="TestShip" parent="." unique_id=1190936938 instance=ExtResource("1_2262g")]
-transform = Transform3D(-0.9999999999999998, 0, 1.224646799147353e-16, 0, 1, 0, -1.224646799147353e-16, 0, -0.9999999999999998, 0, 0, 0)
 
-[node name="Player" parent="." unique_id=195665807 instance=ExtResource("3_l8qe7")]
-transform = Transform3D(1, 0, 2.4492935982947064e-16, 0, 1, 0, -2.4492935982947064e-16, 0, 1, 0, 0, 0)
+[node name="OrbitDisplay" parent="." unique_id=368598934 node_paths=PackedStringArray("trails") instance=ExtResource("5_ifaiv")]
 visible = false
-mouse_sensitivity = 0.005
-speed = 2.0
+modifiers = Array[float]([0.0, 0.421, 0.17])
+star_trail_count = 377
+star_trail_step_size = 0.019
+ship_trail_count = 2904
+ship_trail_step_size = 0.00207
+trails = [null, NodePath("StarTrail"), NodePath("ShipTrail")]
 
-[editable path="Player"]
+[node name="RaymarchedBlackHole" parent="." unique_id=666130988 node_paths=PackedStringArray("ship_node") instance=ExtResource("1_wdj6m")]
+reference_object = 2
+game_minutes_to_days = 20.0
+day_ratio = 144.0
+bh_scale_mult = 5000.0
+ship_node = NodePath("../TestShip")
+bh_radius_world = 109.1878927668015
+ship_drag = 0.001967
+ship_distance_to_bh = 2.7967222002814824
+ship_orbit_eliptical = 1.0
+bh_size_from_ship = 0.00012499999999999
+
+[node name="Player" parent="." unique_id=195665807 instance=ExtResource("4_m1504")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.28185509299441547, -0.49999978679518886, 1.4528456357341055)
+mouse_sensitivity = 0.001
+speed = 2.0
