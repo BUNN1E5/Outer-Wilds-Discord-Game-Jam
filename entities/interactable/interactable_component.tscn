@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c03663nuhknk3"]
+
+[ext_resource type="Script" uid="uid://bg8daxcasdqhy" path="res://entities/interactable/interactable.gd" id="1_hwih1"]
+
+[node name="InteractableComponent" type="Node" unique_id=1536286828 node_paths=PackedStringArray("object_ref")]
+script = ExtResource("1_hwih1")
+object_ref = NodePath("")

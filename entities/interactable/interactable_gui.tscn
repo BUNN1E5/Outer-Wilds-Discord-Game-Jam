@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dcgdujq1gnptf"]
 
-[ext_resource type="Script" uid="uid://dt46uxtnth07p" path="res://entities/player/interactables/interactable_gui.gd" id="1_mtm8q"]
+[ext_resource type="Script" uid="uid://dt46uxtnth07p" path="res://entities/interactable/interactable_gui.gd" id="1_mtm8q"]
 
 [node name="interactable_gui" type="Control" unique_id=205160128]
 layout_mode = 3

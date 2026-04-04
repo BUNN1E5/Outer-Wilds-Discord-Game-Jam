@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="CelestialBody" format=3 uid="uid://0vyu13i24lio"]
+
+[ext_resource type="Script" uid="uid://huutvdn7seab" path="res://enviroment/blackhole/celestial_body.gd" id="1_accpi"]
+
+[resource]
+script = ExtResource("1_accpi")
+position = Vector3(-0.07246, 0, 0)
+last_position = Vector3(-0.01580002846972457, 0, -0.03496682650524109)
+radius = 1.8300158010022875e-07
+mass = 9.27
+velocity = Vector3(0, 0, -0.00672)
+velocity_mag = 0.00672
+sub_steps = 1

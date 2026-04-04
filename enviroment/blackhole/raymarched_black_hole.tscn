@@ -7,46 +7,52 @@
 
 [sub_resource type="Resource" id="Resource_7xp8q"]
 script = ExtResource("3_g0u7g")
-position = Vector3(0.16956801066419155, 0, 0.05765137310058446)
-last_position = Vector3(0.16957822104604217, 0, 0.05763358488148438)
+position = Vector3(0.8485229429166506, 0, 0.03774069484927194)
+last_position = Vector3(0.8484848318273063, 0, 0.03770162047884798)
 radius = 1.8300158010022877e-07
 mass = 9.27
-velocity = Vector3(-0.0014255221856807464, 0, 0.0024835017281342542)
+circular_correction_mult = 1.0
+velocity = Vector3(0.0022866653606623544, 0, 0.0023444622254377434)
+sub_steps = 1
 
 [sub_resource type="Resource" id="Resource_djqko"]
 script = ExtResource("3_g0u7g")
-position = Vector3(-1.6691165114543558, 0, -0.5337524667081617)
-last_position = Vector3(-1.6692190198544965, 0, -0.5335782104569943)
+position = Vector3(-0.8835943665029677, 0, 0.7658720498403199)
+last_position = Vector3(-0.8832921651940253, 0, 0.7662539190837462)
 radius = 0.00465047
 mass = 0.93
-velocity = Vector3(0.0143117075107601, 0, -0.024328781789652226)
+circular_correction_mult = 1.0
+velocity = Vector3(-0.018132078536545748, 0, -0.022912154605578827)
+sub_steps = 1
 
 [sub_resource type="Resource" id="Resource_uprfh"]
 script = ExtResource("3_g0u7g")
-position = Vector3(0.16515518493011472, 0, 0.05421720749278737)
-last_position = Vector3(0.17112571789394013, 0, 0.044930332072372584)
+position = Vector3(0.848644015424055, 0, 0.03786396843408894)
+last_position = Vector3(0.848644015424055, 0, 0.03786396843408894)
 mass = 200000.0
-velocity = Vector3(-0.35823197782952454, 0, 0.5572125252248872)
-sub_steps = 83
+drag = 0.001967
+circular_correction_mult = 1.0
+sub_steps = 400
 
 [sub_resource type="Resource" id="Resource_kxtwn"]
 script = ExtResource("4_7xp8q")
-seconds = 2524609039.885734
-second = 19
-minute = 17
-day = 1
+seconds = 2524945969.8980136
+second = 49
+minute = 52
+hour = 21
+day = 4
 month = 1
 year = 2050
 
 [sub_resource type="Resource" id="Resource_12tpv"]
 script = ExtResource("4_7xp8q")
-seconds = 2529807524.2878265
-second = 44
-minute = 18
-hour = 4
-day = 2
-month = 3
-year = 2050
+seconds = 2862582618.1967654
+second = 18
+minute = 50
+hour = 17
+day = 16
+month = 9
+year = 2060
 
 [sub_resource type="SphereMesh" id="SphereMesh_o54hj"]
 material = ExtResource("2_o54hj")
@@ -69,7 +75,7 @@ bh = SubResource("Resource_7xp8q")
 bh_radius_world = 2.18375785533603
 star = SubResource("Resource_djqko")
 star_radius_world = 554.9405851
-ship_distance_to_bh = 0.005591647733996407
+ship_distance_to_bh = 0.00017278578865985574
 ship = SubResource("Resource_uprfh")
 bh_size_from_ship = 0.011805
 ship_time = SubResource("Resource_kxtwn")
@@ -81,7 +87,7 @@ mesh = SubResource("SphereMesh_o54hj")
 [node name="BH" type="Node3D" parent="." unique_id=223634054]
 
 [node name="Star" type="Node3D" parent="." unique_id=1530391312]
-transform = Transform3D(-0.3957299534423225, 0, -0.9183669222857154, 0, 1, 0, 0.9183669222857154, 0, -0.3957299534423225, -18386.84522118547, 0, -5914.038398087461)
+transform = Transform3D(-0.3957299534423225, 0, -0.9183669222857154, 0, 1, 0, 0.9183669222857154, 0, -0.3957299534423225, -17321.173094196183, 0, 7281.31354991048)
 
 [node name="Ship" type="Node3D" parent="." unique_id=340462803]
-transform = Transform3D(-0.6141598632756966, 0, -0.7891816409047903, 0, 1, 0, 0.7891816409047903, 0, -0.6141598632756966, -44.12825734076837, 0, -34.34165607797094)
+transform = Transform3D(0.7134474760518387, 0, 0.7007087118876578, 0, 1, 0, -0.7007087118876578, 0, 0.7134474760518387, 1.2107250740434063, 0, 1.2327358481700053)

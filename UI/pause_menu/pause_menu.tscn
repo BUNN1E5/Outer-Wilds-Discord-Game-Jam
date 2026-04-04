@@ -1,0 +1,71 @@
+[gd_scene format=3 uid="uid://pcd12pmxa104"]
+
+[ext_resource type="PackedScene" uid="uid://4jbcv07kbc1j" path="res://UI/settings_menu/settings_menu.tscn" id="1_2n0y6"]
+[ext_resource type="Script" uid="uid://dvlmhww234xkx" path="res://UI/pause_menu/pause_menu.gd" id="1_mc6od"]
+[ext_resource type="Theme" uid="uid://dme2n7l7kfqnr" path="res://UI/main_theme.tres" id="2_mc6od"]
+
+[node name="PauseMenu" type="Control" unique_id=577285687]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_mc6od")
+
+[node name="PauseMenu" type="VBoxContainer" parent="." unique_id=2138900771]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_mc6od")
+alignment = 1
+
+[node name="Label" type="Label" parent="PauseMenu" unique_id=1052409406]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme = ExtResource("2_mc6od")
+theme_override_font_sizes/font_size = 61
+text = "Paused"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu" unique_id=271871720]
+layout_mode = 2
+size_flags_horizontal = 6
+alignment = 1
+
+[node name="Resume" type="Button" parent="PauseMenu/VBoxContainer" unique_id=64303744]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_mc6od")
+text = "Resume
+"
+
+[node name="Settings" type="Button" parent="PauseMenu/VBoxContainer" unique_id=991259774]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_mc6od")
+text = "Settings
+"
+
+[node name="Save" type="Button" parent="PauseMenu/VBoxContainer" unique_id=741162185]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_mc6od")
+text = "Save"
+
+[node name="Quit" type="Button" parent="PauseMenu/VBoxContainer" unique_id=241832888]
+layout_mode = 2
+size_flags_vertical = 4
+theme = ExtResource("2_mc6od")
+text = "Quit
+"
+
+[node name="SettingsMenu" parent="." unique_id=201911857 instance=ExtResource("1_2n0y6")]
+visible = false
+layout_mode = 1

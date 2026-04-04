@@ -1,0 +1,360 @@
+[gd_scene format=3 uid="uid://4jbcv07kbc1j"]
+
+[ext_resource type="Script" uid="uid://dw3jw2bmegkt6" path="res://UI/settings_menu/settings_menu.gd" id="1_1syaf"]
+[ext_resource type="Theme" uid="uid://dme2n7l7kfqnr" path="res://UI/main_theme.tres" id="1_77no7"]
+
+[node name="SettingsMenu" type="Control" unique_id=201911857]
+z_index = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1syaf")
+
+[node name="VBoxContainer" type="Panel" parent="." unique_id=86538834]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_77no7")
+
+[node name="TabContainer" type="TabContainer" parent="VBoxContainer" unique_id=323435351]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+current_tab = 2
+all_tabs_in_front = true
+
+[node name="Back" type="Button" parent="VBoxContainer/TabContainer" unique_id=789629276]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="Gameplay" type="PanelContainer" parent="VBoxContainer/TabContainer" unique_id=1136053193]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="Controls" type="PanelContainer" parent="VBoxContainer/TabContainer" unique_id=2114278991]
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Controls" unique_id=13100299]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Group1" type="VBoxContainer" parent="VBoxContainer/TabContainer/Controls/VBoxContainer" unique_id=1105415057]
+layout_mode = 2
+
+[node name="VideoSection" type="Label" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/Group1" unique_id=1180950678]
+layout_mode = 2
+horizontal_alignment = 1
+
+[node name="Mouse-Sensitivity2" type="HSplitContainer" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/Group1" unique_id=919278483]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/Group1/Mouse-Sensitivity2" unique_id=698584011]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Mouse Sensitivity"
+
+[node name="Control" type="HSplitContainer" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/Group1/Mouse-Sensitivity2" unique_id=1346279459]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/Group1/Mouse-Sensitivity2/Control" unique_id=626005947]
+layout_mode = 2
+text = ".005"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TabContainer/Controls/VBoxContainer/Group1/Mouse-Sensitivity2/Control" unique_id=406470945]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.005
+max_value = 1.5
+step = 0.1
+value = 1.005
+
+[node name="Graphics" type="PanelContainer" parent="VBoxContainer/TabContainer" unique_id=1874766399]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/TabContainer/Graphics" unique_id=1460636592]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer" unique_id=648620866]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VideoSettings" type="VBoxContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer" unique_id=1262496185]
+layout_mode = 2
+
+[node name="VideoSection" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings" unique_id=271509953]
+layout_mode = 2
+text = "Video Settings"
+horizontal_alignment = 1
+
+[node name="Resolution" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings" unique_id=57146362]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Resolution" unique_id=2141295555]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Viewport Resolution"
+
+[node name="Option" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Resolution" unique_id=2055620895]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "1920 x 1080 (100%)"
+
+[node name="Resolution-Scale" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings" unique_id=331600839]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Resolution-Scale" unique_id=56068237]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Display Scale"
+
+[node name="Control" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Resolution-Scale" unique_id=106176219]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Resolution-Scale/Control" unique_id=386567056]
+visible = false
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Resolution-Scale/Control" unique_id=781013770]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+min_value = 0.1
+max_value = 1.5
+step = 0.1
+value = 1.0
+
+[node name="Display-Filter" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings" unique_id=799980543]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Display-Filter" unique_id=490664692]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Upscaler"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Display-Filter" unique_id=2102015068]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 0
+item_count = 3
+popup/item_0/text = "Bilinear"
+popup/item_0/id = 1
+popup/item_1/text = "FSR 1.0"
+popup/item_1/id = 2
+popup/item_2/text = "FSR 2.2"
+popup/item_2/id = 3
+
+[node name="FSR-Sharpness" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings" unique_id=680290870]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/FSR-Sharpness" unique_id=547331446]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FSR Sharpness"
+
+[node name="Control" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/FSR-Sharpness" unique_id=1247507999]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/FSR-Sharpness/Control" unique_id=422715997]
+layout_mode = 2
+text = ".2"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/FSR-Sharpness/Control" unique_id=1424672743]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 2.0
+step = 0.1
+value = 0.2
+
+[node name="DLSS-Frame-Generation" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings" unique_id=921008838]
+layout_mode = 2
+split_offsets = PackedInt32Array(-44)
+split_offset = -44
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/DLSS-Frame-Generation" unique_id=692619479]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "DLSS Frame Generation"
+
+[node name="Button" type="Button" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/DLSS-Frame-Generation" unique_id=1337283993]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.84
+toggle_mode = true
+text = "Disabled"
+
+[node name="Fullscreen" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings" unique_id=1770106469]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Fullscreen" unique_id=573224550]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Fullscreen"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Fullscreen" unique_id=383798372]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 1
+item_count = 3
+popup/item_0/text = "Windowed"
+popup/item_0/id = 0
+popup/item_1/text = "Windowed Fullscreen"
+popup/item_1/id = 1
+popup/item_2/text = "Fullscreen"
+popup/item_2/id = 2
+
+[node name="Vsync" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings" unique_id=29844675]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Vsync" unique_id=1737574969]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Vsync"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Vsync" unique_id=1865404970]
+layout_mode = 2
+size_flags_horizontal = 3
+selected = 1
+item_count = 3
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "Adaptive"
+popup/item_1/id = 1
+popup/item_2/text = "Enabled"
+popup/item_2/id = 2
+
+[node name="FPS-Limit" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings" unique_id=244013476]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/FPS-Limit" unique_id=135525929]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "FPS Limit"
+
+[node name="Control" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/FPS-Limit" unique_id=201141990]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label2" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/FPS-Limit/Control" unique_id=2045958611]
+layout_mode = 2
+text = "no limit"
+horizontal_alignment = 2
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/FPS-Limit/Control" unique_id=1583304021]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+max_value = 300.0
+
+[node name="Anti-Aliasing" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings" unique_id=1709407117]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Anti-Aliasing" unique_id=1011871183]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Anti-Aliasing"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/VideoSettings/Anti-Aliasing" unique_id=1609454704]
+layout_mode = 2
+size_flags_horizontal = 3
+item_count = 6
+popup/item_0/text = "Disabled"
+popup/item_0/id = 0
+popup/item_1/text = "FSAA"
+popup/item_1/id = 1
+popup/item_2/text = "SMAA"
+popup/item_2/id = 2
+popup/item_3/text = "MSAA 2x"
+popup/item_3/id = 3
+popup/item_4/text = "MSAA 4x"
+popup/item_4/id = 4
+popup/item_5/text = "MSAA 8x"
+popup/item_5/id = 5
+
+[node name="QualitySettings" type="VBoxContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer" unique_id=437099226]
+visible = false
+layout_mode = 2
+
+[node name="QualitySection" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/QualitySettings" unique_id=2135113730]
+layout_mode = 2
+text = "Quality Settings"
+horizontal_alignment = 1
+
+[node name="AdjustmentSettings2" type="VBoxContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer" unique_id=879268482]
+visible = false
+layout_mode = 2
+
+[node name="AdjustmentSettings" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/AdjustmentSettings2" unique_id=897981776]
+layout_mode = 2
+text = "Adjustments"
+horizontal_alignment = 1
+
+[node name="Brightness" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/AdjustmentSettings2" unique_id=1898021694]
+layout_mode = 2
+split_offsets = PackedInt32Array(-1)
+split_offset = -1
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/AdjustmentSettings2/Brightness" unique_id=1525558682]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Brightness"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/AdjustmentSettings2/Brightness" unique_id=24371211]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="Contrast" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/AdjustmentSettings2" unique_id=1598712458]
+layout_mode = 2
+split_offsets = PackedInt32Array(-1)
+split_offset = -1
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/AdjustmentSettings2/Contrast" unique_id=564695645]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Contrast"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/AdjustmentSettings2/Contrast" unique_id=363983495]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="Saturation" type="HSplitContainer" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/AdjustmentSettings2" unique_id=181419937]
+layout_mode = 2
+split_offsets = PackedInt32Array(-1)
+split_offset = -1
+
+[node name="Label" type="Label" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/AdjustmentSettings2/Saturation" unique_id=1814971313]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Saturation"
+
+[node name="HSlider" type="HSlider" parent="VBoxContainer/TabContainer/Graphics/ScrollContainer/VBoxContainer/AdjustmentSettings2/Saturation" unique_id=73799714]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1

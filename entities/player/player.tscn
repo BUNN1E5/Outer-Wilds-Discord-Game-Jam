@@ -1,21 +1,19 @@
 [gd_scene format=3 uid="uid://rlhfhpkbt0nl"]
 
 [ext_resource type="Script" uid="uid://crskn7j16howk" path="res://entities/player/player_controller.gd" id="1_symyc"]
-[ext_resource type="PackedScene" uid="uid://cmvgbq7vi1svl" path="res://entities/player/arms/arms.tscn" id="2_abrql"]
-[ext_resource type="PackedScene" uid="uid://dcgdujq1gnptf" path="res://entities/player/interactables/interactable_gui.tscn" id="3_sglur"]
+[ext_resource type="FontFile" uid="uid://1rf6lpmyqmn0" path="res://UI/font/DepartureMono-Regular.otf" id="3_fkugw"]
+[ext_resource type="PackedScene" uid="uid://dcgdujq1gnptf" path="res://entities/interactable/interactable_gui.tscn" id="3_sglur"]
+[ext_resource type="PackedScene" uid="uid://pcd12pmxa104" path="res://UI/pause_menu/pause_menu.tscn" id="4_bls4j"]
+[ext_resource type="Script" uid="uid://dmyrl0p5m1og7" path="res://entities/interactable/interactable_controller.gd" id="5_fkugw"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_u3f3p"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_merdl"]
 
-[node name="Player" type="CharacterBody3D" unique_id=195665807 node_paths=PackedStringArray("raycast", "cam", "left_hand", "right_hand")]
-collision_layer = 2
+[node name="Player" type="CharacterBody3D" unique_id=195665807 node_paths=PackedStringArray("interaction_controller", "cam")]
 script = ExtResource("1_symyc")
-mouse_sensitivity = 2.0
-raycast = NodePath("PixelatedCamera/RayCast3D")
+interaction_controller = NodePath("InteractionController")
 cam = NodePath("PixelatedCamera")
-left_hand = NodePath("PixelatedCamera/arms/handL")
-right_hand = NodePath("PixelatedCamera/arms/handR")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=801605889]
 visible = false
@@ -25,6 +23,9 @@ mesh = SubResource("CapsuleMesh_u3f3p")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=22555520]
 shape = SubResource("CapsuleShape3D_merdl")
 
+[node name="hand" type="Marker3D" parent="." unique_id=581556249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -1.5)
+
 [node name="PixelatedCamera" type="Camera3D" parent="." unique_id=260350728]
 physics_interpolation_mode = 1
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -32,17 +33,12 @@ cull_mask = 3
 current = true
 fov = 80.0
 
-[node name="RayCast3D" type="RayCast3D" parent="PixelatedCamera" unique_id=222632064]
+[node name="InteractionRaycase" type="RayCast3D" parent="PixelatedCamera" unique_id=222632064]
 target_position = Vector3(0, 0, -3)
 
-[node name="arms" parent="PixelatedCamera" unique_id=1057050225 instance=ExtResource("2_abrql")]
-transform = Transform3D(-1, 0, -1.2246467991473532e-16, 0, 1, 0, 1.2246467991473532e-16, 0, -1, 0, -1.5053712738479992, 0.13666723453476415)
-
-[node name="handR" parent="PixelatedCamera/arms" index="1" unique_id=2008711126]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.32994354267969705, 0.9485372876556062, 0.3306753180774713)
-
-[node name="handL" parent="PixelatedCamera/arms" index="2" unique_id=1221481169]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2627422496318976, 0.8990828891140027, 0.19363560692947177)
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="PixelatedCamera" unique_id=1916033330]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+remote_path = NodePath("../../hand")
 
 [node name="interactable_gui" parent="." unique_id=205160128 instance=ExtResource("3_sglur")]
 anchors_preset = 15
@@ -52,9 +48,15 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-length = 15.0
+length = 20.0
 width = 5.0
-color = Color(0.74509805, 0.20392157, 0.16470589, 1)
+color = Color(0, 0, 0, 0.5019608)
+font = ExtResource("3_fkugw")
+font_size = 16
+font_width = -1.0
+font_color = Color(1, 1, 1, 1)
+padding = Vector2(10, 5)
+shift = Vector2(3, -30)
 
 [node name="ColorRect" type="ColorRect" parent="interactable_gui" unique_id=1154325682]
 custom_minimum_size = Vector2(1, 1)
@@ -71,4 +73,11 @@ offset_bottom = 2.5
 grow_horizontal = 2
 grow_vertical = 2
 
-[editable path="PixelatedCamera/arms"]
+[node name="PauseMenu" parent="." unique_id=577285687 instance=ExtResource("4_bls4j")]
+visible = false
+
+[node name="InteractionController" type="Node" parent="." unique_id=195643338 node_paths=PackedStringArray("raycast", "hand", "player_camera")]
+script = ExtResource("5_fkugw")
+raycast = NodePath("../PixelatedCamera/InteractionRaycase")
+hand = NodePath("../hand")
+player_camera = NodePath("../PixelatedCamera")
